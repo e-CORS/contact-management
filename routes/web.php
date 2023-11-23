@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,9 @@ use App\Http\Controllers\ContactController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Contacts/Index');
 });
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/contact', [ContactController::class, 'index',])->name('contact.index');
 Route::get('/contact/edit', [ContactController::class, 'edit'])->name('contact.edit');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
