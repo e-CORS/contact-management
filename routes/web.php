@@ -37,6 +37,13 @@ Route::post($loginRoute, function () {
     ]);
 });
 
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login');
+});
+
 Route::get('/contact', [ContactController::class, 'index',])->name('contact.index');
 Route::get('/contact/edit', [ContactController::class, 'edit'])->name('contact.edit');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

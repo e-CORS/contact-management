@@ -29,7 +29,6 @@
             >
                 Welcome
             </h1>
-            {JSON.stringify(errors)}
             <form
                 action=""
                 class="gap-y-5 flex-col flex justify-center items-center"
