@@ -54,7 +54,7 @@
         </div>
         {#if contacts.length > 0}
             <div
-                class="grid-cols-3 grid w-full h-full gap-x-24 gap-y-4 justify-cente px-44"
+                class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid w-full h-full gap-x-24 gap-y-4 justify-cente px-5 md:px-20 lg:px-44"
             >
                 {#each contacts as contact}
                     <div key={contact.id}>
