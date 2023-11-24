@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Public-sans/PublicSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Public-sans/PublicSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Red Hat Display";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Red-hat/RedHatDisplay-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Red Hat Display";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Red-hat/RedHatDisplay-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Red Hat Display";
+    font-style: normal;
+    font-weight: 900;
+    src: url("../fonts/Red-hat/RedHatDisplay-ExtraBold.ttf") format("truetype");
+}

@@ -14,8 +14,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Contacts/Index');
+Route::get('/', [ContactController::class, 'index',]);
+
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
 });
 
 Route::get('/contact', [ContactController::class, 'index',])->name('contact.index');

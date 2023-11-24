@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Inertia\Inertia;
 
 class ContactController extends Controller
 {
     public function index()
     {
         $contacts = Contact::all();
-        return view('contacts.index', ['contacts' => $contacts]);
+        return Inertia::render('Contacts/Index', [
+            'contacts' => $contacts
+        ]);
     }
 
     public function edit()

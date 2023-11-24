@@ -1,14 +1,9 @@
 <script>
-    import { inertia } from "@inertiajs/svelte";
 </script>
 
-<main>
-    <header>
-        <a use:inertia href="/">Home</a>
-        <a use:inertia href="/about">About</a>
-        <a use:inertia href="/contact">Contact</a>
-    </header>
-    <article>
-        <slot />
-    </article>
+<main class="w-full h-screen bg-custom-light-pink">
+    <header class="w-full h-24 sm:bg-custom-pink" />
+    <body>
+        <slot name="content" />
+    </body>
 </main>
