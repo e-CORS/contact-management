@@ -2,18 +2,15 @@
     import Layout from "../../Layouts/Layout.svelte";
     import CustomInput from "../../Components/CustomInput.svelte";
     import CustomButton from "../../Components/CustomButton.svelte";
-    import { onMount } from "svelte";
-
-    let email = "";
-    let password = "";
-
-    onMount(() => {
-        console.log("mounted");
+    import { router, useForm } from "@inertiajs/svelte";
+    let form = useForm({
+        email: null,
+        password: null,
     });
+    export let errors;
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(email, password);
+    function handleSubmit() {
+        router.post("/login", form);
     }
 </script>
 
@@ -32,19 +29,25 @@
             >
                 Welcome
             </h1>
+            {JSON.stringify(errors)}
             <form
                 action=""
                 class="gap-y-5 flex-col flex justify-center items-center"
+                on:submit|preventDefault={handleSubmit}
             >
                 <CustomInput
                     inputName="Email"
                     type="text"
                     placeholder="jhon@doe.com"
+                    bind:value={form.email}
+                    error={errors?.email}
                 />
                 <CustomInput
                     inputName="Password"
                     type="password"
                     placeholder="**************"
+                    bind:value={form.password}
+                    error={errors?.password}
                 />
                 <CustomButton buttonText="Login" />
             </form>

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ContactController;
 use Inertia\Inertia;
 /*
@@ -14,10 +16,25 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [ContactController::class, 'index',]);
+Route::get('/', [ContactController::class, 'index'])->middleware('auth');
 
-Route::get('/login', function () {
+$loginRoute = "/login";
+Route::get($loginRoute, function () {
     return Inertia::render('Auth/Login');
+});
+
+Route::post($loginRoute, function () {
+    $credentials = request()->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
+    if (Auth::attempt($credentials)) {
+        request()->session()->regenerate();
+        return redirect('/');
+    }
+    return redirect('/login')->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ]);
 });
 
 Route::get('/contact', [ContactController::class, 'index',])->name('contact.index');
