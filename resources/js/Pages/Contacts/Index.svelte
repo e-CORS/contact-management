@@ -1,12 +1,17 @@
 <script>
     import Layout from "../../Layouts/Layout.svelte";
     import ContactCard from "../../Components/ContactCard.svelte";
-    import { onMount } from "svelte";
     export let contacts;
-
-    onMount(() => {
-        console.log({ contacts });
-    });
+    let filteredContacts = contacts;
+    const handleSearch = (e) => {
+        const searchingFor = e.target.value.toLowerCase();
+        if (!searchingFor) {
+            return (filteredContacts = contacts);
+        }
+        return (filteredContacts = contacts.filter((contact) =>
+            contact.name.toLowerCase().includes(searchingFor),
+        ));
+    };
 </script>
 
 <svelte:head>
@@ -48,15 +53,16 @@
                 <input
                     type="search"
                     id="default-search"
+                    on:input={handleSearch}
                     class="w-full py-4 pl-12 rounded-lg bg-white font-Public Sans shadow-md border-1 border-custom-pink h-11"
                 />
             </div>
         </div>
-        {#if contacts.length > 0}
+        {#if filteredContacts.length > 0}
             <div
                 class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid w-full h-full gap-x-24 gap-y-4 justify-cente px-5 md:px-20 lg:px-44"
             >
-                {#each contacts as contact}
+                {#each filteredContacts as contact}
                     <div key={contact.id}>
                         <ContactCard
                             name={contact.name}
