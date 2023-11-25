@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the contacts that user has.
+     */
+    public function contact()
+    {
+        return $this->hasMany('App\Models\Contact');
+    }
 }

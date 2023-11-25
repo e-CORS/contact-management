@@ -1,6 +1,8 @@
 <script>
     import Layout from "../../Layouts/Layout.svelte";
     import ContactCard from "../../Components/ContactCard.svelte";
+    import { router } from "@inertiajs/svelte";
+
     export let contacts;
     let filteredContacts = contacts;
     const handleSearch = (e) => {
@@ -11,6 +13,10 @@
         return (filteredContacts = contacts.filter((contact) =>
             contact.name.toLowerCase().includes(searchingFor),
         ));
+    };
+
+    const handleContactCardClick = (contactId) => {
+        router.get(`/contact/${contactId}`);
     };
 </script>
 
@@ -62,8 +68,14 @@
             <div
                 class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid w-full h-full gap-x-24 gap-y-4 justify-cente px-5 md:px-20 lg:px-44"
             >
-                {#each filteredContacts as contact}
-                    <div key={contact.id}>
+                {#each filteredContacts as contact, index}
+                    <div
+                        role="button"
+                        tabindex={index}
+                        key={contact.id}
+                        on:click={() => handleContactCardClick(contact.id)}
+                        on:keydown={() => handleContactCardClick(contact.id)}
+                    >
                         <ContactCard
                             name={contact.name}
                             profilePicture={contact.profilePicture}

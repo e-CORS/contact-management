@@ -19,6 +19,7 @@ use Inertia\Inertia;
 Route::get('/', [ContactController::class, 'index'])->middleware('auth');
 
 $loginRoute = "/login";
+
 Route::get($loginRoute, function () {
     return Inertia::render('Auth/Login');
 });
@@ -44,6 +45,6 @@ Route::post('/logout', function () {
     return redirect('/login');
 });
 
-Route::get('/contact', [ContactController::class, 'index',])->name('contact.index');
-Route::get('/contact/edit', [ContactController::class, 'edit'])->name('contact.edit');
+Route::get('/contact/{contactId}', [ContactController::class, 'getContact',])->middleware('auth');
+Route::get('/contact/{contactId}/edit', [ContactController::class, 'edit'])->middleware('auth');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

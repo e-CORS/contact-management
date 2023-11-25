@@ -12,11 +12,13 @@ export default {
         extend: {
             colors: {
                 "custom-pink": " #FBEEFF",
+                "custom-light-pink": "#99879D",
             },
             backgroundColor: {
                 "custom-pink": " #FBEEFF",
                 "custom-purple": "#9378FF",
                 "custom-light-pink": "#FAF9FE",
+                "custom-gray": "#EBEBEB",
             },
             borderRadius: {
                 "custom-rounded": "60px",

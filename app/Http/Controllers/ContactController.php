@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $loggedUser = Auth::user();
+        $contacts = $loggedUser->contact;
+        if (!$contacts) {
+            $contacts = [];
+        }
         return Inertia::render('Contacts/Index', [
             'contacts' => $contacts
         ]);
@@ -18,7 +23,20 @@ class ContactController extends Controller
 
     public function edit()
     {
-        return view('contacts.edit');
+        $contactId = request()->route('contactId');
+        $contact = Contact::find($contactId);
+        return Inertia::render('Contacts/Edit', [
+            'contact' => $contact
+        ]);
+    }
+
+    public function getContact()
+    {
+        $contactId = request()->route('contactId');
+        $contact = Contact::find($contactId);
+        return Inertia::render('Contacts/Details', [
+            'contact' => $contact
+        ]);
     }
 
     public function store(Request $request)

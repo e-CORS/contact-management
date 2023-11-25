@@ -17,4 +17,12 @@ class Contact extends Model
         'address',
         'profilePicture'
     ];
+
+    /**
+     * Get the user that created the contact.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
