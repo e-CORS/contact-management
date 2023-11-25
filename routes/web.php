@@ -47,4 +47,5 @@ Route::post('/logout', function () {
 
 Route::get('/contact/{contactId}', [ContactController::class, 'getContact',])->middleware('auth');
 Route::get('/contact/{contactId}/edit', [ContactController::class, 'edit'])->middleware('auth');
+Route::post('/contact/{contactId}/edit', [ContactController::class, 'editContact']);
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

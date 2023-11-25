@@ -1,12 +1,24 @@
 <script>
     import img from "../../img/back_arrow.png";
     import { router } from "@inertiajs/svelte";
+
     let currentPath = window.location.pathname;
+
     function handleLogout() {
         router.post("/logout");
     }
+
+    function getContactIdFromUrl(url) {
+        const urlParts = url.split("/");
+        return urlParts[2];
+    }
+
     function handleBack() {
-        router.get("/");
+        if (currentPath.includes("/edit")) {
+            const contactId = getContactIdFromUrl(currentPath);
+            return (window.location.href = `/contact/${contactId}`);
+        }
+        return router.get("/");
     }
 </script>
 

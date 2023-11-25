@@ -29,6 +29,23 @@ class ContactController extends Controller
             'contact' => $contact
         ]);
     }
+    public function editContact()
+    {
+        $contactId = request()->route('contactId');
+        $newContact = request()->validate([
+            'name' => 'required|string',
+            'title' => 'required|string',
+            'email' => 'required|email:rfc',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'profilePicture' => 'required|string'
+        ]);
+        Contact::where('id', $contactId)->update($newContact);
+        $contact = Contact::find($contactId);
+        return Inertia::render('Contacts/Edit', [
+            'contact' => $contact
+        ]);
+    }
 
     public function getContact()
     {

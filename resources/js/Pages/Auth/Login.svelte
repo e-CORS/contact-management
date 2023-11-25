@@ -30,7 +30,6 @@
                 Welcome
             </h1>
             <form
-                action=""
                 class="gap-y-5 flex-col flex justify-center items-center"
                 on:submit|preventDefault={handleSubmit}
             >
