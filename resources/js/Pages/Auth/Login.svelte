@@ -20,7 +20,7 @@
 
 <Layout>
     <div
-        class="w-full h-full flex justify-center content-center mt-44"
+        class="w-full h-full flex justify-center content-center md:mt-44"
         slot="content"
     >
         <div class="w-96 flex flex-col">

@@ -3,9 +3,9 @@
     import ContactBanner from "./ContactBanner.svelte";
     export let contact;
     const contactInfo = {
-        address: contact.address,
-        email: contact.email,
-        phone: contact.phone,
+        address: contact?.address || "",
+        email: contact?.email || "",
+        phone: contact?.phone || "",
     };
 </script>
 

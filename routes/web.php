@@ -45,7 +45,9 @@ Route::post('/logout', function () {
     return redirect('/login');
 });
 
+Route::get('/contact/create', [ContactController::class, 'createPage'])->middleware('auth');
 Route::get('/contact/{contactId}', [ContactController::class, 'getContact',])->middleware('auth');
-Route::get('/contact/{contactId}/edit', [ContactController::class, 'edit'])->middleware('auth');
-Route::post('/contact/{contactId}/edit', [ContactController::class, 'editContact']);
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact/{contactId}/edit', [ContactController::class, 'editPage'])->middleware('auth');
+
+Route::post('/contact/create', [ContactController::class, 'createContact'])->middleware('auth');
+Route::post('/contact/{contactId}/edit', [ContactController::class, 'editContact'])->middleware('auth');

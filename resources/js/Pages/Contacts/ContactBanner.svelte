@@ -18,21 +18,21 @@
             class="bg-custom-pink md:bg-custom-gray w-full h-full rounded-2xl relative flex flex-col justify-start md:justify-end items-center"
         >
             <img
-                src={contact.profilePicture}
+                src={contact?.profilePicture}
                 alt="Contact profile"
-                class="relative top-2 w-20 h-20 md:bottom-0 md:w-44 md:h-44 rounded-full object-cover md:translate-y-1/4 border-2 border-black"
+                class="relative top-2 w-20 h-20 md:bottom-0 md:w-44 md:h-44 rounded-full object-cover md:translate-y-1/4 border-2 border-black bg-white"
             />
             <h1
                 class="md:hidden font-Red Hat Display font-bold text-2xl mt-8 mb-1 text-center"
             >
-                {contact.name}
+                {contact?.name}
             </h1>
             <p
                 class="md:hidden font-Public Sans font-normal text-base mb-1 text-center text-custom-light-pink"
             >
-                {contact.title}
+                {contact?.title}
             </p>
-            {#if !currentPath.includes("edit")}
+            {#if !currentPath.includes("edit") && !currentPath.includes("create")}
                 <div
                     tabindex="0"
                     role="button"
@@ -64,12 +64,12 @@
         <h1
             class="hidden md:flex font-Red Hat Display font-bold text-2xl mb-1 text-center"
         >
-            {contact.name}
+            {contact?.name}
         </h1>
         <p
             class="hidden md:flex font-Public Sans font-normal text-base mb-1 text-center text-custom-light-pink"
         >
-            {contact.title}
+            {contact?.title}
         </p>
     </div>
 </div>

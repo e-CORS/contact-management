@@ -10,7 +10,7 @@
     <img
         src={profilePicture}
         alt="Contact profile"
-        class="w-16 rounded-full mr-5 h-16"
+        class="w-16 rounded-full mr-5 h-16 object-cover"
     />
     <div class="flex flex-col">
         <p class="font-Red Hat Display font-bold text-lg mb-1">{name}</p>

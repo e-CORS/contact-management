@@ -1,19 +1,19 @@
 <script>
     import Layout from "../../Layouts/Layout.svelte";
+    import defaultProfilePicture from "../../../img/no_user.png";
     import ContactBanner from "./ContactBanner.svelte";
     import CustomInput from "../../Components/CustomInput.svelte";
     import CustomButton from "../../Components/CustomButton.svelte";
     import { router, useForm } from "@inertiajs/svelte";
 
     export let errors;
-    export let contact;
 
     let editableContactInfo = {
-        name: "",
+        name: "Jhon Doe",
         address: "",
-        title: "",
+        title: "Unknown",
         phone: "",
-        profilePicture: "",
+        profilePicture: defaultProfilePicture,
         email: "",
     };
     let form = useForm({});
@@ -32,19 +32,19 @@
         for (const [key, value] of Object.entries(editableContactInfo)) {
             if (value) {
                 form[key] = value;
-            } else {
-                form[key] = contact[key];
             }
         }
-        router.post(`/contact/${contact.id}/edit`, form);
-        handleCancel();
+        router.post(`/contact/create`, form);
     }
 </script>
 
 <Layout>
     <div slot="content">
         <div class="hidden md:flex">
-            <ContactBanner {contact} {handleContactUpload} />
+            <ContactBanner
+                contact={editableContactInfo}
+                {handleContactUpload}
+            />
         </div>
         <form class="flex flex-col items-start md:items-center">
             <div
@@ -56,7 +56,8 @@
                             inputName={key.charAt(0).toUpperCase() +
                                 key.slice(1)}
                             type="text"
-                            placeholder={contact[key]}
+                            placeholder={key.charAt(0).toUpperCase() +
+                                key.slice(1)}
                             bind:value={editableContactInfo[key]}
                             error={errors?.[key]}
                         />

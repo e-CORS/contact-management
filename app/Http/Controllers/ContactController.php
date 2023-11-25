@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -21,7 +22,7 @@ class ContactController extends Controller
         ]);
     }
 
-    public function edit()
+    public function editPage()
     {
         $contactId = request()->route('contactId');
         $contact = Contact::find($contactId);
@@ -56,23 +57,25 @@ class ContactController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function createPage()
     {
-        $isString = 'required|string';
-        $data = $request->validate([
-            'name' => $isString,
-            'title' => $isString,
+        return Inertia::render('Contacts/Create');
+    }
+
+    public function createContact()
+    {
+        $newContact = request()->validate([
+            'name' => 'required|string',
+            'title' => 'required|string',
             'email' => 'required|email:rfc',
-            'phone' => 'required|numeric|digits:9',
-            'address' => $isString,
-            'profilePicture' => 'required|image|mimes:jpeg,png,jpg,gif'
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'profilePicture' => 'required|string'
         ]);
-        if ($request->hasFile('profilePicture')) {
-            $file = $request->file('profilePicture');
-            $image = base64_encode(file_get_contents($file->path()));
-            $data['profilePicture'] = $image;
-        }
-        Contact::create($data);
-        return redirect(route('contact.index'));
+        $newContact['user_id'] = Auth::id();
+        Contact::create($newContact);
+        return Inertia::render('Contacts/Details', [
+            'contact' => $newContact
+        ]);
     }
 }

@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('phone', 100)->unique()->nullable(false);
             $table->string('address', 100)->nullable(false);
             $table->text('profilePicture')->nullable(false);
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')
+                ->constrained(table: 'users', indexName: 'contacts_user_id')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

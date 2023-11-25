@@ -1,10 +1,16 @@
 <script>
     import Layout from "../../Layouts/Layout.svelte";
     import ContactCard from "../../Components/ContactCard.svelte";
+    import CustomButton from "../../Components/CustomButton.svelte";
     import { router } from "@inertiajs/svelte";
+    import noContactImg_1 from "../../../img/no_contacts_1.png";
+    import noContactImg_2 from "../../../img/no_contacts_2.png";
+    import noContactImg_3 from "../../../img/no_contacts_3.png";
 
     export let contacts;
+
     let filteredContacts = contacts;
+
     const handleSearch = (e) => {
         const searchingFor = e.target.value.toLowerCase();
         if (!searchingFor) {
@@ -17,6 +23,10 @@
 
     const handleContactCardClick = (contactId) => {
         router.get(`/contact/${contactId}`);
+    };
+
+    const handleCreateContact = () => {
+        router.get(`/contact/create`);
     };
 </script>
 
@@ -85,23 +95,36 @@
                 {/each}
             </div>
         {:else}
-            <div>
-                <div class="relative">
+            <div class="w-full flex flex-col items-center">
+                <div class="relative w-full flex items-center justify-center">
                     <img
-                        src="../../../img/no_contacts_1.png"
+                        src={noContactImg_1}
                         alt="pink circle"
-                        class="absolute"
+                        class="relative"
                     />
                     <img
-                        src="../../../img/no_contacts_2.png"
+                        src={noContactImg_2}
                         alt="3 users greyed out"
                         class="absolute"
                     />
                     <img
-                        src="../../../img/no_contacts_3.png"
+                        src={noContactImg_3}
                         alt="a diagonal vector"
                         class="absolute"
                     />
+                </div>
+                <p
+                    class="font-Red Hat Display text-xl font-bold text-center mt-6 w-52"
+                >
+                    Add contacts to your database
+                </p>
+                <div
+                    role="button"
+                    tabindex="0"
+                    on:click={handleCreateContact}
+                    on:keydown={handleCreateContact}
+                >
+                    <CustomButton buttonText="Add new Contact" class="mt-9" />
                 </div>
             </div>
         {/if}

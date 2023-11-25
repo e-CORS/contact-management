@@ -15,7 +15,8 @@ class Contact extends Model
         'email',
         'phone',
         'address',
-        'profilePicture'
+        'profilePicture',
+        'user_id'
     ];
 
     /**
@@ -23,6 +24,6 @@ class Contact extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }
